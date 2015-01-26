@@ -8,8 +8,14 @@ var config = {
     app: {
       name: 'ois-dn5'
     },
-    port: 3000,
-    db: 'mysql://localhost/ois-dn5-development'
+    port: 8080,
+    // new Sequelize(...) arguments: database, user, pass, options.
+    db: {
+      database: 'northwind',
+      username: 'nodejs',
+      password: 'nodejs',
+      options: {dialect: 'mysql'}
+    }
   },
 
   test: {
@@ -17,8 +23,14 @@ var config = {
     app: {
       name: 'ois-dn5'
     },
-    port: 3000,
-    db: 'mysql://localhost/ois-dn5-test'
+    port: 8080,
+    // new Sequelize(...) arguments: database, user, pass, options.
+    db: {
+      database: 'northwind',
+      username: 'nodejs',
+      password: 'nodejs',
+      options: {dialect: 'mysql'}
+    }
   },
 
   production: {
@@ -26,8 +38,14 @@ var config = {
     app: {
       name: 'ois-dn5'
     },
-    port: 3000,
-    db: 'mysql://localhost/ois-dn5-production'
+    port: 8080,
+    // new Sequelize(...) arguments: database, user, pass, options.
+    db: {
+      database: 'northwind',
+      username: 'nodejs',
+      password: 'nodejs',
+      options: {dialect: 'mysql'}
+    }
   }
 };
 

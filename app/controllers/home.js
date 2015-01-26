@@ -8,7 +8,8 @@ module.exports = function (app) {
 
 router.get('/', function (req, res, next) {
 
-  db.Article.findAll().success(function (articles) {
+  db.Suppliers.findAll().success(function (articles) {
+    console.log(articles);
     res.render('index', {
       title: 'Generator-Express MVC',
       articles: articles
