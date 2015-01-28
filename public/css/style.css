@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+.row.clickable:hover {
+  cursor: pointer;
+  background: whitesmoke;
+}
+
+#form input {
+  width: 90%;
+}
+
+#form {
+  margin: 0;
+}
