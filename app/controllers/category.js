@@ -7,14 +7,19 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
+// Handler za pregled izdelkov kategorije CategoryID == cid.
 router.get('/category/:cid', function (req, res, next) {
 
-  // find all categories
+  // Najdi vse kategorije.
   db.Categories.findAll().success(function (categories) {
+    // Parsaj cid, ce po parsanju ni definiran, ne nadaljuj z izvajanjem.
     var cidInt = parseInt(req.params.cid) || req.params.cid;
-    // find products with categoryid
+    if(!cidInt) return;
+
+    // Najdi vse izdelke, kjer je CategoryID == cid.
     db.Products.findAll({ where: { CategoryID: cidInt } }).success(function (products) {
-      // map dataValues (creates array), if error occured, set products to null
+      // Izberi samo dataValues (dejanske vrednosti) iz products objekta,
+      // ce pride do napake, nastavi seznam na null.
       var foundProducts;
       try {
         foundProducts = products.map(function(e) { return e.dataValues; });
@@ -22,6 +27,7 @@ router.get('/category/:cid', function (req, res, next) {
       catch (e) {
         foundProducts = null;
       }
+      // Najdi izbrano kategorijo, ce pride do napake, jo nastavi na null.
       var selectedCategory;
       try {
         var foundCategories = categories.filter(function(e) { return e.dataValues.CategoryID === cidInt; });
@@ -30,16 +36,22 @@ router.get('/category/:cid', function (req, res, next) {
       catch (e) {
         selectedCategory = null;
       }
-      // set category name from selected category or use empty string
+      // Nastavi ime kategorije iz najdene izbrane najdene kategorije,
+      // ce ta ne obstaja, uporabi prazen string.
       var categoryName = selectedCategory != null ? selectedCategory.CategoryName : '';
 
-      // render index with master / detail view
+      // Izrisi view s podatki o pregledu kategorije (izbrana kategorija, izdelki).
       res.render('index', {
         title: 'Kategorije izdelkov',
+        // Mapaj seznam kategorij v senzam dataValues iz posamezne kategorije.
         categories: categories.map(function(e) { return e.dataValues; }),
+        // Naslov pregleda kategorije.
         productsTitle: categoryName,
+        // Seznam izdelkov za prikaz.
         products: foundProducts,
+        // Id izbrane kategorije.
         selectedCategory: cidInt,
+        // Handlebars helper, ki izbrani kategoriji doda atribut checked.
         helpers: {
           checkCid: function (cid) { return cid == cidInt ? 'checked' : ''; }
         }
