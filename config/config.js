@@ -14,7 +14,10 @@ var config = {
       database: 'northwind',
       username: 'nodejs',
       password: 'nodejs',
-      options: {dialect: 'mysql'}
+      options: {
+        dialect: 'mysql',
+        pool: false
+      }
     }
   },
 
