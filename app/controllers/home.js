@@ -8,11 +8,10 @@ module.exports = function (app) {
 
 router.get('/', function (req, res, next) {
 
-  db.Suppliers.findAll().success(function (articles) {
-    console.log(articles);
+  db.Categories.findAll().success(function (categories) {
     res.render('index', {
-      title: 'Generator-Express MVC',
-      articles: articles
+      title: 'Kategorije izdelkov',
+      categories: categories.map(function(e) { return e.dataValues; })
     });
   });
 });

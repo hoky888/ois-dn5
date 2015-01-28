@@ -1,4 +1,59 @@
 
 
-  <h1>{{title }}</h1>
-  <p>Welcome to {{title }}</p>
+  <h1>{{title}}</h1>
+
+
+  {{#each categories}}
+    <p>
+      <input type="radio" value="{{this.CategoryID}}" name="category" {{checkCid this.CategoryID}}> {{this.CategoryName}} ({{this.Description}})
+    </p>
+  {{/each}}
+
+  {{#if selectedCategory}}
+    <script>window.selectedProduct.cid = {{selectedCategory}};</script>
+  {{/if}}
+
+
+  {{#if products}}
+    <h2>Seznam izdelkov za "{{productsTitle}}"</h2>
+
+      <div>
+        <button class="btn btn-default" id="btn-add">Dodaj</button>
+        <button class="btn btn-default" id="btn-update">Posodobi</button>
+        <button class="btn btn-default" id="btn-delete">Izbrisi</button>
+      </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Ime izdelka</th>
+            <th>Cena</th>
+            <th>Zaloga</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each products}}
+          <tr data-pid="{{this.ProductID}}">
+            <td>{{this.ProductName}}</td>
+            <td>{{this.UnitPrice}} €</td>
+            <td>{{this.UnitsInStock}}x</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+
+      <form id="form" class="form-inline row hidden" action="#" method="POST">
+        <div class="col-sm-7">
+          <input type="text" name="ProductName" class="form-control" id="input-add-name" placeholder="Ime izdelka">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="UnitPrice" class="form-control" id="input-add-price" placeholder="Cena">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="UnitsInStock" class="form-control" id="input-add-stock" placeholder="Zaloga">
+        </div>
+        <button type="submit" class="btn btn-success col-sm-1">Shrani</button>
+      </form>
+    </div>
+  {{/if}}
