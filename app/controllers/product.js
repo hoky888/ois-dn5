@@ -45,7 +45,7 @@ router.post('/product/update/:pid', function(req, res, next) {
         // Poslji status 200 (OK) ob uspesni posodobitvi.
         res.sendStatus(200);
       }).error(function() {
-        // Poslji status 200 (Internal Server Error) ob napaki pri dodajanju.
+        // Poslji status 500 (Internal Server Error) ob napaki pri dodajanju.
         res.sendStatus(500);
       });
     }
