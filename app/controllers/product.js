@@ -28,7 +28,7 @@ router.post('/product/add/:cid', function(req, res, next) {
 
 // Handler za posodobitev izdelka.
 router.post('/product/update/:pid', function(req, res, next) {
-  // Parsaj cid, ce po parsanju ni definiran, ne nadaljuj z izvajanjem.
+  // Parsaj pid, ce po parsanju ni definiran, ne nadaljuj z izvajanjem.
   var pidInt = parseInt(req.params.pid) || 0;
   if(pidInt <= 0)
     return;
@@ -57,7 +57,7 @@ router.post('/product/update/:pid', function(req, res, next) {
 
 // Handler za brisanje izdelka.
 router.post('/product/delete/:pid', function(req, res, next) {
-  // Parsaj cid, ce po parsanju ni definiran, ne nadaljuj z izvajanjem.
+  // Parsaj pid, ce po parsanju ni definiran, ne nadaljuj z izvajanjem.
   var pidInt = parseInt(req.params.pid) || 0;
   if(pidInt <= 0)
     return;
